@@ -3,12 +3,14 @@ package clases;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PhoneLog {
 	
@@ -71,6 +73,40 @@ public class PhoneLog {
 		.limit(3)
 		.forEach(System.out::println);
 		
+		/*************LAS TRES LLAMADAS MAS LARGAS EN MAYO*******************************************/
+		
+		phoneCallLog.stream()
+		.filter(c -> c.getTime().getMonth() == Month.MAY)
+		.sorted(Comparator.comparing(PhoneCall::getDuration).reversed())
+		.limit(3)
+		.forEach(System.out::println);
+		
+		/*****************CREADORES DE STREAMS*************************************************/
+		
+		/*************DESDE COLECCIONES ***********************************/
+		List<Integer> numbers = new ArrayList<>();
+		for (int i = 0; i < 1000; i++) {
+			numbers.add((int) Math.round(Math.random()*100));
+			
+		Stream<Integer> evenNumber = numbers.stream();
+		
+		// or parallelStream
+		
+		Stream<Integer> evenNumber2 = numbers.parallelStream();
+		
+		/******************DIRECTAMENTE DESDE VALORES ************************/
+		Stream.of("Using", "Stream","API","from","Java8");
+		
+		//can convert parallelStream
+		
+		Stream.of("Using", "Stream","API","from","Java8").parallel()
+		
+		//En java8 las interfaces además de métodos por defecto pueden tener metodos estaticos
+		
+		
+		;
+		
+		}
 		
 		 
 	}
